@@ -2,8 +2,11 @@ import express from 'express';
 import * as userController from '../controllers/user.controller';
 import { newUserValidator } from '../validators/user.validator';
 import { userAuth } from '../middlewares/auth.middleware';
+import * as controller from '../controllers/registration';
 
 const router = express.Router();
+
+router.post('/register', controller.register);
 
 //route to get all users
 router.get('', userController.getAllUsers);
