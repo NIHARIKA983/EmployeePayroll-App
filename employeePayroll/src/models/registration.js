@@ -39,3 +39,20 @@ export const  register = (data, callback) => {
       return callback('Internal error', null);
     }
   };
+
+
+export const  loginModel = (loginInfo, callback) => {
+    try {
+      RegistrationModel.findOne({ email: loginInfo.email }, (error, data) => {
+        if (error) {
+          return callback(error, null);
+        } else if (!data) {
+          return callback('Invalid email', null);
+        } else {
+          return callback(null, data);
+        }
+      });
+    } catch (error) {
+      callback('Internal error', null);
+    }
+  }

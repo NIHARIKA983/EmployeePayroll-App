@@ -37,5 +37,35 @@ export const  register = (req, res) => {
           message: 'Internal server error',
         });
       }
-    }
+}
+
+export const login = (req, res) => {
+  try {
+    const userLoginInfo = {
+      email: req.body.email,
+      password: req.body.password
+    };
+    service.userLogin(userLoginInfo, (error, token) => {
+      if (error) {
+        return res.status(400).json({
+          success: false,
+          message: 'Unable to login. Please enter correct info',
+          error
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'User logged in successfully',
+        token: token
+      });
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Error while Login',
+      data: null
+    });
+  }
+};
+
 

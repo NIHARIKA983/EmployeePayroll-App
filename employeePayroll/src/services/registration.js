@@ -1,4 +1,6 @@
 import * as models from '../models/registration';
+import bcrypt from 'bcrypt';
+import * as  utilities from '../utils/user.util';
 
 export const register = (data, callback) => {
     models.register(data, (err, data) => {
@@ -9,3 +11,21 @@ export const register = (data, callback) => {
       }
    });
   }; 
+
+export const  userLogin = (InfoLogin, callback) => {
+    models.loginModel(InfoLogin, (error, data) => {
+      if (data) {
+        bcrypt.compare(InfoLogin.password, data.password, (error, validate) => {
+          if (!validate) {
+
+            return callback(error + 'Invalid Password', null);
+          } else {
+            const token = utilities.token(data);
+            return callback(null, token);
+          }
+        });
+      } else {
+        return callback(error);
+      }
+    });
+  }

@@ -7,7 +7,7 @@ var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.register = void 0;
+exports.register = exports.loginModel = void 0;
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
@@ -70,3 +70,23 @@ var register = function register(data, callback) {
 };
 
 exports.register = register;
+
+var loginModel = function loginModel(loginInfo, callback) {
+  try {
+    RegistrationModel.findOne({
+      email: loginInfo.email
+    }, function (error, data) {
+      if (error) {
+        return callback(error, null);
+      } else if (!data) {
+        return callback('Invalid email', null);
+      } else {
+        return callback(null, data);
+      }
+    });
+  } catch (error) {
+    callback('Internal error', null);
+  }
+};
+
+exports.loginModel = loginModel;

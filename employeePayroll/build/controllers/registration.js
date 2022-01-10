@@ -5,7 +5,7 @@ var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.register = void 0;
+exports.register = exports.login = void 0;
 
 var service = _interopRequireWildcard(require("../services/registration"));
 
@@ -57,3 +57,35 @@ var register = function register(req, res) {
 };
 
 exports.register = register;
+
+var login = function login(req, res) {
+  try {
+    var userLoginInfo = {
+      email: req.body.email,
+      password: req.body.password
+    };
+    service.userLogin(userLoginInfo, function (error, token) {
+      if (error) {
+        return res.status(400).json({
+          success: false,
+          message: 'Unable to login. Please enter correct info',
+          error: error
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: 'User logged in successfully',
+        token: token
+      });
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Error while Login',
+      data: null
+    });
+  }
+};
+
+exports.login = login;
