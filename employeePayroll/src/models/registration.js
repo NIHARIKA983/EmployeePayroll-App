@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import * as utilities from '../utils/user.util';
+import logger from '../config/logger';
 
 const registrationSchema = mongoose.Schema({
   firstName: { type: String, required: true },
@@ -36,6 +37,7 @@ export const  register = (data, callback) => {
         }
       });
     } catch (error) {
+      logger.error('Find error in model');
       return callback('Internal error', null);
     }
   };
@@ -45,10 +47,13 @@ export const  loginModel = (loginInfo, callback) => {
     try {
       RegistrationModel.findOne({ email: loginInfo.email }, (error, data) => {
         if (error) {
+          logger.error('Find error while loggin user');
           return callback(error, null);
         } else if (!data) {
+          logger.error('Invalid User');
           return callback('Invalid email', null);
         } else {
+          logger.info('Email id found');
           return callback(null, data);
         }
       });

@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _typeof = require("@babel/runtime/helpers/typeof");
 
 Object.defineProperty(exports, "__esModule", {
@@ -10,6 +12,8 @@ exports.register = exports.login = void 0;
 var service = _interopRequireWildcard(require("../services/registration"));
 
 var helper = _interopRequireWildcard(require("../utils/user.util"));
+
+var _logger = _interopRequireDefault(require("../config/logger"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -42,6 +46,8 @@ var register = function register(req, res) {
         });
       }
 
+      _logger["default"].info('User registered');
+
       return res.status(200).send({
         success: true,
         message: 'registered successfully',
@@ -49,6 +55,8 @@ var register = function register(req, res) {
       });
     });
   } catch (err) {
+    _logger["default"].error('Internal server error');
+
     res.status(500).send({
       success: false,
       message: 'Internal server error'
@@ -73,6 +81,8 @@ var login = function login(req, res) {
         });
       }
 
+      _logger["default"].info('User logged in successfully');
+
       return res.status(200).json({
         success: true,
         message: 'User logged in successfully',
@@ -80,6 +90,8 @@ var login = function login(req, res) {
       });
     });
   } catch (error) {
+    _logger["default"].error('Internal server error');
+
     return res.status(500).json({
       success: false,
       message: 'Error while Login',

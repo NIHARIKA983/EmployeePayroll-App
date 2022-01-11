@@ -13,6 +13,8 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var utilities = _interopRequireWildcard(require("../utils/user.util"));
 
+var _logger = _interopRequireDefault(require("../config/logger"));
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -65,6 +67,8 @@ var register = function register(data, callback) {
       }
     });
   } catch (error) {
+    _logger["default"].error('Find error in model');
+
     return callback('Internal error', null);
   }
 };
@@ -77,10 +81,16 @@ var loginModel = function loginModel(loginInfo, callback) {
       email: loginInfo.email
     }, function (error, data) {
       if (error) {
+        _logger["default"].error('Find error while loggin user');
+
         return callback(error, null);
       } else if (!data) {
+        _logger["default"].error('Invalid User');
+
         return callback('Invalid email', null);
       } else {
+        _logger["default"].info('Email id found');
+
         return callback(null, data);
       }
     });

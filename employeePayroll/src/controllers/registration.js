@@ -1,5 +1,6 @@
 import * as service from '../services/registration';
 import * as helper from '../utils/user.util';
+import logger from '../config/logger';
 
 export const  register = (req, res) => {
       try {
@@ -25,6 +26,7 @@ export const  register = (req, res) => {
               message: "User already exist",
             });
           }
+          logger.info('User registered');
           return res.status(200).send({
             success: true,
             message: 'registered successfully',
@@ -32,6 +34,7 @@ export const  register = (req, res) => {
           });
         });
       } catch (err) {
+        logger.error('Internal server error');
         res.status(500).send({
           success: false,
           message: 'Internal server error',
@@ -53,6 +56,7 @@ export const login = (req, res) => {
           error
         });
       }
+      logger.info('User logged in successfully');
       return res.status(200).json({
         success: true,
         message: 'User logged in successfully',
@@ -60,6 +64,7 @@ export const login = (req, res) => {
       });
     });
   } catch (error) {
+    logger.error('Internal server error');
     return res.status(500).json({
       success: false,
       message: 'Error while Login',
