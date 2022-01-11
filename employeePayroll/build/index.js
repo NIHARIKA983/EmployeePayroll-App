@@ -17,6 +17,10 @@ var _cors = _interopRequireDefault(require("cors"));
 
 var _helmet = _interopRequireDefault(require("helmet"));
 
+var _swaggerUiExpress = _interopRequireDefault(require("swagger-ui-express"));
+
+var _swagger = _interopRequireDefault(require("../src/swagger/swagger.json"));
+
 var _routes = _interopRequireDefault(require("./routes"));
 
 var _database = _interopRequireDefault(require("./config/database"));
@@ -46,6 +50,7 @@ app.use(_express["default"].json());
 app.use((0, _morgan["default"])('combined', {
   stream: _logger.logStream
 }));
+app.use('/api-docs', _swaggerUiExpress["default"].serve, _swaggerUiExpress["default"].setup(_swagger["default"]));
 (0, _database["default"])();
 app.use("/api/".concat(api_version), (0, _routes["default"])());
 app.use(_error.appErrorHandler);
