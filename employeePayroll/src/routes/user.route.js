@@ -1,7 +1,7 @@
 import express from 'express';
 import * as userController from '../controllers/user.controller';
 import { newUserValidator } from '../validators/user.validator';
-import { userAuth } from '../middlewares/auth.middleware';
+import { validateToken } from '../utils/user.util';
 import * as controller from '../controllers/registration';
 
 const router = express.Router();
@@ -17,7 +17,7 @@ router.post('/employees', newUserValidator, userController.newUser);
 router.get('/getEmployees', userController.getAllUsers);
 
 //route to get a single user by their user id
-router.get('/:_id', userAuth, userController.getUser);
+router.get('/getEmployee/:_id', validateToken, userController.getUser);
 
 //route to update a single user by their user id
 router.put('/:_id', userController.updateUser);

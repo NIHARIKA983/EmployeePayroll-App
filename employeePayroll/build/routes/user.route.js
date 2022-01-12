@@ -15,7 +15,7 @@ var userController = _interopRequireWildcard(require("../controllers/user.contro
 
 var _user2 = require("../validators/user.validator");
 
-var _auth = require("../middlewares/auth.middleware");
+var _user3 = require("../utils/user.util");
 
 var controller = _interopRequireWildcard(require("../controllers/registration"));
 
@@ -32,7 +32,7 @@ router.post('/employees', _user2.newUserValidator, userController.newUser); //ro
 
 router.get('/getEmployees', userController.getAllUsers); //route to get a single user by their user id
 
-router.get('/:_id', _auth.userAuth, userController.getUser); //route to update a single user by their user id
+router.get('/getEmployee/:_id', _user3.validateToken, userController.getUser); //route to update a single user by their user id
 
 router.put('/:_id', userController.updateUser); //route to delete a single user by their user id
 
