@@ -34,7 +34,7 @@ router.get('/getEmployees', _user3.validateToken, userController.getAllUsers); /
 
 router.get('/getEmployee/:_id', _user3.validateToken, userController.getUser); //route to update a single user by their user id
 
-router.put('/:_id', userController.updateUser); //route to delete a single user by their user id
+router.put('/updateEmployee/:_id', _user3.validateToken, userController.updateUser); //route to delete a single user by their user id
 
 router["delete"]('/:_id', userController.deleteUser);
 var _default = router;
