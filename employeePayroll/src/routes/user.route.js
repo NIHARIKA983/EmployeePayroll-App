@@ -11,10 +11,10 @@ router.post('/register', controller.register);
 router.post('/login', controller.login);
 
 //route to create a new user
-router.post('/employees', newUserValidator, userController.newUser);
+router.post('/employees',validateToken, newUserValidator, userController.newUser);
 
 //route to get all users
-router.get('/getEmployees', userController.getAllUsers);
+router.get('/getEmployees',validateToken, userController.getAllUsers);
 
 //route to get a single user by their user id
 router.get('/getEmployee/:_id', validateToken, userController.getUser);
