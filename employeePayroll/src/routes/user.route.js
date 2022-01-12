@@ -14,7 +14,7 @@ router.post('/login', controller.login);
 router.post('/employees', newUserValidator, userController.newUser);
 
 //route to get all users
-router.get('', userController.getAllUsers);
+router.get('/getEmployees', userController.getAllUsers);
 
 //route to get a single user by their user id
 router.get('/:_id', userAuth, userController.getUser);

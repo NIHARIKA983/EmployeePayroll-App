@@ -26,13 +26,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 var router = _express["default"].Router();
 
 router.post('/register', controller.register);
-router.post('/login', controller.login); // // Create a new Employee
-// app.post('/employees', helper.authenticateToken, employee.createNewEmployee);
-//route to create a new user
+router.post('/login', controller.login); //route to create a new user
 
 router.post('/employees', _user2.newUserValidator, userController.newUser); //route to get all users
 
-router.get('', userController.getAllUsers); //route to get a single user by their user id
+router.get('/getEmployees', userController.getAllUsers); //route to get a single user by their user id
 
 router.get('/:_id', _auth.userAuth, userController.getUser); //route to update a single user by their user id
 

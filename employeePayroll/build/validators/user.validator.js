@@ -11,10 +11,9 @@ var _joi = _interopRequireDefault(require("@hapi/joi"));
 
 var newUserValidator = function newUserValidator(req, res, next) {
   var schema = _joi["default"].object({
-    // name: Joi.string().min(4).required(),
-    firstName: _joi["default"].string().alphanum().min(3).max(30).required(),
-    lastName: _joi["default"].string().alphanum().min(3).max(30).required(),
-    gender: _joi["default"].string().alphanum().max(6).required(),
+    firstName: _joi["default"].string().min(3).max(30).required(),
+    lastName: _joi["default"].string().min(3).max(30).required(),
+    gender: _joi["default"].string().max(6).required(),
     salary: _joi["default"].number().integer().required(),
     department: _joi["default"].string().alphanum().min(2).max(20).required(),
     emailId: _joi["default"].string().email().required()

@@ -8,9 +8,6 @@ exports["default"] = void 0;
 var _mongoose = require("mongoose");
 
 var userSchema = new _mongoose.Schema({
-  // name: {
-  //   type: String
-  // }
   firstName: {
     type: String,
     required: true,
