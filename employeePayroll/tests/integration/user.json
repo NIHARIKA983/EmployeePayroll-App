@@ -1,0 +1,47 @@
+{
+    "user": {
+        "registration": {
+            "firstName": "Rekha",
+            "lastName": "An",
+            "email": "rekha@gmail.com",
+            "password": "rekha12$&"
+        },
+        "registrationWithImproperDetails": {
+            "firstName": "Srinivas",
+            "email": "srinivas@gmail.com",
+            "password": "srinivas$123#"
+        },
+        "registrationWithImproperValidation": {
+            "firstName": "srinivas",
+            "lastName": "An",
+            "email": "srinivas@gmail.com",
+            "password": "srinivas$123"
+        },
+        "registrationWithOutEmail": {
+            "firstName": "srinivas",
+            "lastName": "An",
+            "password": "srinivas$123"
+        },
+        "registrationWithOutfirstName": {
+            "lastName": "An",
+            "email": "srinivas@gmail.com",
+            "password": "srinivas$123"
+        },
+        "login": {
+            "email": "viharikagowda1996@gmail.com",
+            "password": "Viharika96$&"
+        },
+        "loginWithImproperDetails": {
+            "email": "akash123@gmail.com",
+            "password": "akash12"
+        },
+        "loginWithImproperPassword": {
+            "email": "niharikagowda1996@gmail.com",
+            "password": "akash12"
+        },
+        "loginWithImproperEmail": {
+            "email": "ak",
+            "password": "akash12$&"
+        }
+    }
+}
