@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.token = exports.hashing = exports.authSchema = void 0;
+exports.validateToken = exports.token = exports.hashing = exports.authSchema = void 0;
 
 var _joi = _interopRequireDefault(require("@hapi/joi"));
 
@@ -59,3 +59,38 @@ var token = function token(data) {
 };
 
 exports.token = token;
+
+var validateToken = function validateToken(req, res, next) {
+  console.log(req.headers.authorization);
+  var header = req.headers.authorization;
+  var myArr = header.split(' ');
+  var token = myArr[1];
+
+  try {
+    if (token) {
+      _jsonwebtoken["default"].verify(token, process.env.JWT_SECRET, function (error, decoded) {
+        if (error) {
+          return res.status(400).send({
+            success: false,
+            message: 'Invalid Token'
+          });
+        } else {
+          req.user = decoded;
+          next();
+        }
+      });
+    } else {
+      return res.status(401).send({
+        success: false,
+        message: 'Authorisation failed! Invalid user'
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: 'Something went wrong!'
+    });
+  }
+};
+
+exports.validateToken = validateToken;
