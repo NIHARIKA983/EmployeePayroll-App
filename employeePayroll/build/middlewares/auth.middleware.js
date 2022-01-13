@@ -47,7 +47,7 @@ var userAuth = /*#__PURE__*/function () {
           case 4:
             bearerToken = bearerToken.split(' ')[1];
             _context.next = 7;
-            return _jsonwebtoken["default"].verify(bearerToken, 'your-secret-key');
+            return _jsonwebtoken["default"].verify(bearerToken, process.env.JWT_SECRET);
 
           case 7:
             _yield$jwt$verify = _context.sent;

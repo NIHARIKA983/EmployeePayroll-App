@@ -15,7 +15,7 @@ var userController = _interopRequireWildcard(require("../controllers/user.contro
 
 var _user2 = require("../validators/user.validator");
 
-var _user3 = require("../utils/user.util");
+var _auth = require("../middlewares/auth.middleware");
 
 var controller = _interopRequireWildcard(require("../controllers/registration"));
 
@@ -28,14 +28,14 @@ var router = _express["default"].Router();
 router.post('/register', controller.register);
 router.post('/login', controller.login); //route to create a new user
 
-router.post('/employees', _user3.validateToken, _user2.newUserValidator, userController.newUser); //route to get all users
+router.post('/employees', _auth.userAuth, _user2.newUserValidator, userController.newUser); //route to get all users
+// router.get('/getEmployees',validateToken, userController.getAllUsers);
+// //route to get a single user by their user id
+// router.get('/getEmployee/:_id', validateToken, userController.getUser);
+// //route to update a single user by their user id
+// router.put('/updateEmployee/:_id', validateToken,userController.updateUser);
+// //route to delete a single user by their user id
+// router.delete('/deleteEmployee/:_id',validateToken, userController.deleteUser);
 
-router.get('/getEmployees', _user3.validateToken, userController.getAllUsers); //route to get a single user by their user id
-
-router.get('/getEmployee/:_id', _user3.validateToken, userController.getUser); //route to update a single user by their user id
-
-router.put('/updateEmployee/:_id', _user3.validateToken, userController.updateUser); //route to delete a single user by their user id
-
-router["delete"]('/deleteEmployee/:_id', _user3.validateToken, userController.deleteUser);
 var _default = router;
 exports["default"] = _default;
