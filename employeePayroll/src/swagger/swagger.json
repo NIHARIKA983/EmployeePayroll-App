@@ -71,6 +71,221 @@
                     }
                 }
             }
+        },
+
+        "/employees": {
+            "post": {
+                "tags": [
+                    "create new employee"
+                ],
+                "description": "create new employee",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for vaidation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "create new employee",
+                        "in": "body",
+                        "description": "employee body",
+                        "schema": {
+                            "$ref": "#/definitions/employee"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "schema": {
+                    "$ref": "#/definitions/employee"
+                },
+                "responses": {
+                    "201": {
+                        "description": "create new employee succesfully !!"
+                    },
+                    "400": {
+                        "description": "Please enter Valid Token"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/getEmployees": {
+            "get": {
+                "tags": [
+                    "Get employee "
+                ],
+                "description": "Get a  employee !!",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for vaidation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "schema": {
+                    "$ref": "#/definitions/employee"
+                },
+                "responses": {
+                    "201": {
+                        "description": "All users fetched successfully"
+                    },
+                    "401": {
+                        "description": "Please enter Valid Token"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/getEmployee/{id}": {
+            "get": {
+                "tags": [
+                    "Get employee"
+                ],
+                "description": "Get a employee by ID for perticuler person id",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for vaidation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of employee you want to fetch",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "schema": {
+                    "$ref": "#/definitions/employee"
+                },
+                "responses": {
+                    "201": {
+                        "description": "User fetched successfully"
+                    },
+                    "400": {
+                        "description": "Please enter Valid Token"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/updateEmployee/{id}": {
+            "put": {
+                "tags": [
+                    "update employee"
+                ],
+                "description": "update a employee by ID for perticuler person id !!",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for vaidation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of employee you want to update",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "note",
+                        "description": "employee body",
+                        "schema": {
+                            "$ref": "#/definitions/updatemployee"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "update note succesfully !!"
+                    },
+                    "401": {
+                        "description": "Please enter Valid Token"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/deleteEmployee/{id}": {
+            "delete": {
+                "tags": [
+                    "Delete employee"
+                ],
+                "description": "Delete a employee by ID for perticuler person id !!",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Token for vaidation",
+                        "schema": {
+                            "type": "string",
+                            "required": true
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of employee you want to update",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Delete employee succesfully !!"
+                    },
+                    "401": {
+                        "description": "Please enter Valid Token"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -101,6 +316,68 @@
                 "password": {
                     "type": "string"
                 }
+            }
+        },
+        "employee": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "salary": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "emailId": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "firstName": "Write a firstName here.....",
+                "lastName": "Write a lastName here.....",
+                "gender": "Write a gender here.....",
+                "salary": "Write a salary here.....",
+                "department": "Write a department here.....",
+                "emailId": "Write a emailId here....."
+            }
+        },
+        "updatemployee": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "salary": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "emailId": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "firstName": "Write a firstName here.....",
+                "lastName": "Write a lastName here.....",
+                "gender": "Write a gender here.....",
+                "salary": "Write a salary here.....",
+                "department": "Write a department here.....",
+                "emailId": "Write a emailId here....."
             }
         }
     }
