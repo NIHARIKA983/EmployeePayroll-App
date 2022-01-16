@@ -11,7 +11,7 @@ export const newUserValidator = (req, res, next) => {
         .max(30)
         .required(),
     gender:Joi.string()
-        .max(6)
+        .max(20)
         .required(),
     salary:Joi.number()
         .integer()
